@@ -1,0 +1,31 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>TKPPL | Branching (Percabangan)</title><link rel="stylesheet" type="text/css" href="bower_components/prism/themes/prism.css"><link rel="stylesheet" type="text/css" href="bower_components/todc-bootstrap-main/dist/css/bootstrap.min.css"><link rel="stylesheet" type="text/css" href="styles/main-presentation.css"></head><body></body></html><nav role="navigation" class="navbar navbar-default"><div class="container"><div class="navbar-header"><button type="button" data-toggle="collapse" data-target="presentation-chooser" class="navbar-toggle"><span class="sr-only"></span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="index.html" class="navbar-brand">Teknologi Kolaborasi</a></div><div id="presentation-chooser" class="collapse navbar-collapse"><ul class="nav navbar-nav"><li class="dropdown"><a data-toggle="dropdown" href="#" class="dropdown-toggle">Pilih Presentasi <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="1-Introduction.html">Pengenalan Kuliah</a></li><li><a href="2-TeknologiKolaborasi.html">Teknologi Kolaborasi</a></li><li><a href="3-PresentasiDenganBespokeJS.html">Presentasi dengan Bespoke.JS</a></li><li><a href="4-SCRUM.html">SCRUM</a></li><li><a href="5-UserStories.html">User Stories</a></li><li><a href="6-Trello.html">Trello dan Bug Reporting</a></li><li><a href="7-PengenalanKontrolVersi.html">Kontrol Versi</a></li><li><a href="8-DasarKontrolVersi.html">Dasar Kontrol Versi</a></li><li><a href="9-Commit.html">Commit</a></li><li><a href="10-LogDanHistory.html">Log dan History</a></li><li><a href="6-TugasBeSpoke.html">Tugas Be Spoke</a></li><li><a href="11-TimeMachine.html">Time Machine</a></li><li><a href="12-PushDanPull.html">Push dan Pull</a></li><li><a href="13-Branching.html">Branching (Percabangan)</a></li><li><a href="14-GitFlow.html">GitFlow Workflow</a></li></ul></li></ul></div></div></nav><article id="presentation"><section><h1>Percabangan (Branching)</h1><p>Teknik Kolaborasi TI</p></section><section><h2 class="bullet">Kenapa Perlu Percabangan?</h2><hr><ul><li>Ketika bereksperimen kita tidak ingin "mengotori" kode utama</li><li>Terjadi percabangan secara alami (e.g. mengubah kode dan commit bersamaan)</li><li>Kenapa tidak menggunakan clone atau copy paste saja?</li></ul></section><section><h2>Pembuatan Cabang Baru</h2><code class="language-bash"><pre>$ git branch &lt;nama_cabang&gt;
+</pre></code></section><section><h2>Berpindah Cabang</h2><code class="language-bash"><pre>$ git checkout &lt;nama_cabang&gt;
+</pre></code></section><section><h2>Buat Cabang Baru dan Pindah</h2><p>(gabungan dari dua perintah sebelumnya)</p><code class="language-bash"><pre>$ git checkout -b &lt;nama_cabang&gt;
+</pre></code></section><section><h2>Buat Cabang Baru dan Pindah (cont.)</h2><code class="language-bash"><pre>bert@FEBRONIA ~/Desktop/code/tib (master)
+$ git checkout -b experiment
+Switched to a new branch 'experiment'
+
+bert@FEBRONIA ~/Desktop/code/tib (experiment)
+$
+</pre></code></section><section><h2>Kembali ke Cabang Utama</h2><code class="language-bash"><pre>$ git checkout master
+</pre></code></section><section><h2>Kembali ke Cabang Utama (cont.)</h2><code class="language-bash"><pre>bert@FEBRONIA ~/Desktop/code/tib (experiment)
+$ git checkout master
+Switched to branch 'master'
+
+bert@FEBRONIA ~/Desktop/code/tib (master)
+$
+</pre></code></section><section><h1>Eksperimen!</h1></section><section><h2 class="bullet">Menggabungkan Dua Cabang</h2><code class="language-bash"><pre>$ git merge &lt;nama_cabang&gt;</pre></code><ol><li>Menggabungkan <code class="inline language-bash">&lt;nama_cabang&gt;</code> ke cabang yang sedang aktif</li><li>Mencoba menyelesaikan konflik secara otomatis</li><li>Jika konflik tidak dapat diselesaikan otomatis, jalankan <code class="inline language-bash">git mergetool</code></li></ol></section><section><h2 class="bullet">Menggabungkan Dua Cabang (cont.)</h2><code class="language-bash"><pre>$ git mergetool</pre></code><ul><li>Menjalankan tool yang ditentukan pada konfigurasi git (<code class="inline language-bash">merge.tool</code>)</li></ul></section><section><h2>Melihat Daftar Cabang</h2><code class="language-bash"><pre>$ git branch
+</pre></code></section><section><h2>Melihat Daftar Cabang (cont.)</h2><code class="language-bash"><pre>bert@FEBRONIA ~/Desktop/code/tib (master)
+$ git branch
+experiment
+* master
+</pre></code></section><section><h2>Melihat Daftar Cabang (cont.)</h2><p>Plus: melihat commit terakhir</p><code class="language-bash"><pre>$ git branch -v
+</pre></code></section><section><h2>Melihat Daftar Cabang (cont.)</h2><code class="language-bash"><pre>bert@FEBRONIA ~/Desktop/projects/mhstest/ACE (master)
+$ git branch -v
+* master      06985e8 [ahead 6] MERGE from MASTER OK
+testinglagi 06985e8 MERGE from MASTER OK
+</pre></code></section><section><h2>Melihat Daftar Cabang (cont.)</h2><p>Plus: melihat cabang yang sudah bergabung ke master</p><code class="language-bash"><pre>$ git branch --merged</pre></code></section><section><h2>Melihat Daftar Cabang (cont.)</h2><p>Plus: melihat cabang yang <strong>belum</strong> bergabung ke master</p><code class="language-bash"><pre>$ git branch --no-merged
+</pre></code></section><section><h2>Menghapus Cabang</h2><code class="language-bash"><pre>$ git branch -d &lt;nama_cabang&gt;
+
+
+</pre></code></section></article><script src="bower_components/bespoke.js/dist/bespoke.min.js"></script><script src="bower_components/bespoke-bullets/dist/bespoke-bullets.min.js"></script><script src="bower_components/bespoke-scale/dist/bespoke-scale.min.js"></script><script src="bower_components/bespoke-hash/dist/bespoke-hash.min.js"></script><script src="bower_components/bespoke-progress/dist/bespoke-progress.min.js"></script><script src="bower_components/bespoke-state/dist/bespoke-state.min.js"></script><script src="bower_components/prism/prism.js"></script><script src="bower_components/prism/components/prism-bash.min.js"></script><script src="scripts/main.js"></script><script src="bower_components/jquery/jquery.min.js"></script><script src="bower_components/todc-bootstrap-main/dist/js/bootstrap.min.js"></script>

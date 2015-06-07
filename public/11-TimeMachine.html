@@ -1,0 +1,147 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>TKPPL | Time Machine</title><link rel="stylesheet" type="text/css" href="bower_components/prism/themes/prism.css"><link rel="stylesheet" type="text/css" href="bower_components/todc-bootstrap-main/dist/css/bootstrap.min.css"><link rel="stylesheet" type="text/css" href="styles/main-presentation.css"></head><body></body></html><nav role="navigation" class="navbar navbar-default"><div class="container"><div class="navbar-header"><button type="button" data-toggle="collapse" data-target="presentation-chooser" class="navbar-toggle"><span class="sr-only"></span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a href="index.html" class="navbar-brand">Teknologi Kolaborasi</a></div><div id="presentation-chooser" class="collapse navbar-collapse"><ul class="nav navbar-nav"><li class="dropdown"><a data-toggle="dropdown" href="#" class="dropdown-toggle">Pilih Presentasi <b class="caret"></b></a><ul class="dropdown-menu"><li><a href="1-Introduction.html">Pengenalan Kuliah</a></li><li><a href="2-TeknologiKolaborasi.html">Teknologi Kolaborasi</a></li><li><a href="3-PresentasiDenganBespokeJS.html">Presentasi dengan Bespoke.JS</a></li><li><a href="4-SCRUM.html">SCRUM</a></li><li><a href="5-UserStories.html">User Stories</a></li><li><a href="6-Trello.html">Trello dan Bug Reporting</a></li><li><a href="7-PengenalanKontrolVersi.html">Kontrol Versi</a></li><li><a href="8-DasarKontrolVersi.html">Dasar Kontrol Versi</a></li><li><a href="9-Commit.html">Commit</a></li><li><a href="10-LogDanHistory.html">Log dan History</a></li><li><a href="6-TugasBeSpoke.html">Tugas Be Spoke</a></li><li><a href="11-TimeMachine.html">Time Machine</a></li><li><a href="12-PushDanPull.html">Push dan Pull</a></li><li><a href="13-Branching.html">Branching (Percabangan)</a></li><li><a href="14-GitFlow.html">GitFlow Workflow</a></li></ul></li></ul></div></div></nav><article id="presentation"><section><h1>Time Machine</h1><h2>Berkelana Menelusuri Ruang Waktu</h2><p>Teknik Kolaborasi TI</p></section><section><h2 class="bullet">Kembali ke Waktu Lampau</h2><hr><ul><li>Kadang-kadang kita perlu mengembalikan atau melihat kode versi lama</li><li>Mungkin ingin melihat satu file saja (contoh: method yang sudah dihapus dulu)</li><li>Atau bisa juga ingin melihat banyak file (contoh: fitur yang tidak jadi ditambahkan)</li></ul></section><section><h2 class="bullet">Fitur Mesin Waktu Git</h2><hr><ul><li>Fitur utama: mengembalikan kode ke commit lama, membatalkan commit, membersihkan staging area</li><li><strong>Peringatan:</strong> penggunaan beberapa fitur mesin waktu berbahaya karena perubahan tidak dapat dikembalikan</li></ul></section><section><h2 class="bullet">Penelusuran Commit Lama</h2><code class="language-bash"><pre>$ git checkout &lt;commit&gt; &lt;file&gt;</pre></code><p>Catatan:</p><ol><li><code class="inline language-bash">&lt;commit&gt;</code> diisi nomor commit. 6 karakter pertama saja.</li><li><code class="inline language-bash">&lt;file&gt;</code> diisi file yang ingin dilihat pada commit di atas. Opsional.</li><li>Perintah ini juga digunakan untuk percabangan (pembahasan dua minggu depan)</li></ol></section><section><h2 class="bullet">Perintah Git Checkout</h2><hr><ul><li>Memeriksa versi lain dari kode dari tiga sisi, yaitu: file, commit, dan cabang.</li><li>Untuk hari ini kita hanya akan berfokus pada dua sisi: file dan commit.</li><li>Versi lain dari commit akan mengganti isi seluruh direktori menjadi commit tersebut.</li><li>Versi lain file hanya mengubah file yang relevan saja.</li></ul></section><section><h2>Sebelum checkout...</h2><p>Harus mengetahui commit mana yang ingin dikunjungi terlebih dahulu</p><img src="images/GitCheckoutCommitValue.png"></section><section><h2>Mari coba checkout untuk commit:</h2><code class="language-bash"><pre>bert@FEBRONIA ~/Desktop/projects/mikroskil/quill (master)
+$ git checkout e5259e0
+Note: checking out 'e5259e0'.
+
+# pesan panjang...
+
+HEAD is now at e5259e0... tweak styles
+
+bert@FEBRONIA ~/Desktop/projects/mikroskil/quill ((e5259e0...))
+$
+</pre></code></section><section><h2 class="bullet">Commit Checkout Notes</h2><hr><ol><li><code class="inline language-bash">(master)</code> menjadi <code class="inline language-bash">((e5259e0...))</code></li><li>File yang ada di direktori utama sekarang adalah file pada versi pada commit <code class="inline language-bash">e5259e0...</code></li><li>Kita bebas melakukan kompilasi, test, hapus, diff, dkk pada file ini</li><li>Segala perubahan yang dilakukan <strong>tidak akan tersimpan</strong></li></ol></section><section><h2>Kembali ke Master</h2><code class="language-bash"><pre>bert@FEBRONIA ~/Desktop/projects/mikroskil/quill ((e5259e0...))
+$ git checkout master
+Previous HEAD position was e5259e0... tweak styles
+Switched to branch 'master'
+
+bert@FEBRONIA ~/Desktop/projects/mikroskil/quill (master)
+$
+</pre></code></section><section><h2>Mari coba checkout untuk file:</h2><code class="language-bash"><pre>bert@FEBRONIA ~/Desktop/projects/mikroskil/quill (master)
+$ git checkout e5259e0 package.json
+
+bert@FEBRONIA ~/Desktop/projects/mikroskil/quill (master)
+$
+</pre></code></section><section><h2 class="bullet">File Checkout Notes</h2><hr><ol><li>Berbeda dengan checkout pada commit, di sini hanya 1 file yang berubah</li><li>Perubahan file tersebut <strong>dapat tersimpan dalam git</strong> (coba jalankan <code class="inline language-bash">git status</code>)</li></ol></section><section><h2>Kembali ke File Terbaru</h2><code class="language-bash"><pre>bert@FEBRONIA ~/Desktop/projects/mikroskil/quill (master)
+$ git checkout HEAD package.json
+
+bert@FEBRONIA ~/Desktop/projects/mikroskil/quill (master)
+$
+</pre></code></section><section><h2 class="bullet">Mengubah Sejarah</h2><hr><ul><li>Git Checkout hanya memungkinkan kita untuk melihat isi kode lama</li><li>Terkadang, kita ingin mengubah sejarah kode (mis: ada bug parah di kode baru)</li><li>Untuk mengembalikan kode ke versi lama dan mengubah sejarahnya, kita dapat menggunakan Git Revert</li></ul></section><section><h2 class="bullet">Git Revert</h2><p>Perintah:</p><code class="language-bash"><pre>$ git revert &lt;commit&gt;</pre></code><ol><li>Revert akan membuat commit baru secara otomatis</li><li>Ketika melakukan revert, sejarah kode tidak akan hilang</li><li>Karenanya, operasi ini bisa dikatakan "aman" karena perubahan tercatat dalam sejarah</li></ol></section><section><h2>Contoh Penggunaan Revert (1)</h2><code class="language-bash"><pre>bert@FEBRONIA ~/Desktop/projects/mikroskil/quill (master)
+$ git log --oneline -2
+7c1182f allow local sauce testing
+b3a1f69 Update travis encrypted variables
+
+bert@FEBRONIA ~/Desktop/projects/mikroskil/quill (master)
+$ git revert b3a1f69
+[master 7fa56ce] Revert &quot;Update travis encrypted variables&quot;
+1 file changed, 2 insertions(+), 2 deletions(-)
+</pre></code></section><section><h2>Contoh Penggunaan Revert (2)</h2><code class="language-bash"><pre>bert@FEBRONIA ~/Desktop/projects/mikroskil/quill (master)
+$ git log --oneline -3
+7fa56ce Revert &quot;Update travis encrypted variables&quot;
+7c1182f allow local sauce testing
+b3a1f69 Update travis encrypted variables
+
+bert@FEBRONIA ~/Desktop/projects/mikroskil/quill (master)
+$
+</pre></code></section><section><h2>Ilustrasi Proses Revert</h2><img src="images/GitRevertIllustration.png"></section><section><h2 class="bullet">Menghapus Sejarah</h2><hr><ul><li>Terkadang mengubah sejarah saja tidak cukup</li><li>Perintah utama: Git Reset</li></ul></section><section><h2 class="bullet">Git Reset</h2><p>Perintah:</p><code class="language-bash"><pre>$ git reset &lt;option&gt; &lt;file&gt;</pre></code><ol><li>Secara sederhana sama dengan Checkout, tapi perubahan data dicatat</li><li>Seperti Checkout, Reset memiliki banyak konfigurasi</li><li>Bisa digunakan untuk: membersihkan staging area, menghapus sejarah</li><li>Gunakan hanya untuk repository lokal. Ingat bahwa sejarah <strong>terhapus selamanya</strong></li></ol></section><section><h2>Fungsi Git Reset 1</h2><p>Membuang <strong>satu</strong> file dari staging area:</p><code class="language-bash"><pre>$ git reset &lt;file&gt;
+</pre></code></section><section><h2>Fungsi Git Reset 1 (cont.)</h2><code class="language-bash"><pre>bert@FEBRONIA ~/Desktop/code/tibk (master)
+$ git status
+#   keterangan file staging..
+#
+#       modified:   FAQs.md
+#       modified:   kode.txt
+#
+
+bert@FEBRONIA ~/Desktop/code/tibk (master)
+$ git reset FAQs.md
+Unstaged changes after reset:
+M       FAQs.md
+</pre></code></section><section><h2>Fungsi Git Reset 1 (cont.)</h2><code class="language-bash"><pre>bert@FEBRONIA ~/Desktop/code/tibk (master)
+$ git status
+# Keterangan file staging...
+#
+#       modified:   kode.txt
+#
+# Keterangan file non-staging...
+#
+#       modified:   FAQs.md
+#
+</pre></code></section><section><h2>Fungsi Git Reset 2</h2><p>Membuang <strong>semua</strong> file dari staging area:</p><code class="language-bash"><pre>$ git reset
+</pre></code></section><section><h2>Fungsi Git Reset 2 (cont.)</h2><code class="language-bash"><pre>bert@FEBRONIA ~/Desktop/code/tibk (master)
+$ git status
+# Keterangan file staging...
+#
+#       modified:   FAQs.md
+#       modified:   kode.txt
+#
+
+bert@FEBRONIA ~/Desktop/code/tibk (master)
+$ git reset
+Unstaged changes after reset:
+M       FAQs.md
+M       kode.txt
+</pre></code></section><section><h2>Fungsi Git Reset 2 (cont.)</h2><code class="language-bash"><pre>bert@FEBRONIA ~/Desktop/code/tibk (master)
+$ git status
+# On branch master
+# Changes not staged for commit:
+#   (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+#   (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+#
+#       modified:   FAQs.md
+#       modified:   kode.txt
+#
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</pre></code></section><section><h2 class="bullet">Fungsi Git Reset 3</h2><p>Membuang <strong>semua</strong> file dari staging area dan mengembalikan isi file ke commit sebelumnya:</p><code class="language-bash"><pre>$ git reset --hard</pre></code><ol><li>Seluruh perubahan file yang belum di-commit <strong>akan hilang</strong></li><li>Gunakan dengan sangat hati-hati, karena isi file tidak dapat dikembalikan lagi</li></ol></section><section><h2>Fungsi Git Reset 3 (cont.)</h2><code class="language-bash"><pre>bert@FEBRONIA ~/Desktop/code/tibk (master)
+$ git status
+# Keterangan file staging...
+#
+#       modified:   FAQs.md
+#       modified:   kode.txt
+#
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+
+bert@FEBRONIA ~/Desktop/code/tibk (master)
+$ git reset --hard
+HEAD is now at f4c1204 Tambah 1 line
+</pre></code></section><section><h2>Fungsi Git Reset 3 (cont.)</h2><code class="language-bash"><pre>bert@FEBRONIA ~/Desktop/code/tibk (master)
+$ git status
+# On branch master
+nothing to commit, working directory clean
+</pre></code></section><section><h2 class="bullet">Fungsi Git Reset 4</h2><p>Mengembalikan kode ke &lt;commit&gt;, tanpa menghapus file di staging:</p><code class="language-bash"><pre>$ git reset &lt;commit&gt;</pre></code><ol><li>Biasanya digunakan untuk merapikan sejarah</li><li>Misal: beberapa commit eksperimen yang tidak ingin dimasukkan ke sejarah</li><li>Bisa juga menggunakan branch (pembahasan dua minggu depan)</li></ol></section><section><h2>Fungsi Git Reset 4 (cont.)</h2><p>Asumsikan kita mengubah FAQs.md dan kode.txt:</p><code class="language-bash"><pre>$ git reset 946981
+Unstaged changes after reset:
+M       FAQs.md
+M       kode.txt
+
+bert@FEBRONIA ~/Desktop/code/tibk (master)
+# Keterangan Unstaged...
+#
+#       modified:   FAQs.md
+#       modified:   kode.txt
+#
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</pre></code></section><section><h2 class="bullet">Fungsi Git Reset 5</h2><p>Mengembalikan kode ke &lt;commit&gt; dan menghapus file di staging:</p><code class="language-bash"><pre>$ git reset --hard &lt;commit&gt;</pre></code><ol><li>Perintah akan menghapus seluruh data, baik di staging maupun commit.</li><li>Guankan dengan <strong>sangat hati-hati</strong>.</li></ol></section><section><h2>Fungsi Git Reset 5 (cont.)</h2><code class="language-bash"><pre>bert@FEBRONIA ~/Desktop/code/tibk (master)
+$ git log --oneline -2
+946981a Jadi apa
+3894f43 kode.txt
+
+bert@FEBRONIA ~/Desktop/code/tibk (master)
+$ git status
+# Keterangan Unstaged...
+#
+#       modified:   FAQs.md
+#       modified:   kode.txt
+#
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</pre></code></section><section><h2>Fungsi Git Reset 5 (cont.)</h2><code class="language-bash"><pre>bert@FEBRONIA ~/Desktop/code/tibk (master)
+$ git reset --hard 3894f43
+HEAD is now at 3894f43 kode.txt
+
+bert@FEBRONIA ~/Desktop/code/tibk (master)
+$ git status
+# On branch master
+nothing to commit, working directory clean
+
+bert@FEBRONIA ~/Desktop/code/tibk (master)
+$ git log --oneline -2
+3894f43 kode.txt
+f97fe05 git ignore
+</pre></code></section><section><h2>Pertanyaan?</h2></section></article><script src="bower_components/bespoke.js/dist/bespoke.min.js"></script><script src="bower_components/bespoke-bullets/dist/bespoke-bullets.min.js"></script><script src="bower_components/bespoke-scale/dist/bespoke-scale.min.js"></script><script src="bower_components/bespoke-hash/dist/bespoke-hash.min.js"></script><script src="bower_components/bespoke-progress/dist/bespoke-progress.min.js"></script><script src="bower_components/bespoke-state/dist/bespoke-state.min.js"></script><script src="bower_components/prism/prism.js"></script><script src="bower_components/prism/components/prism-bash.min.js"></script><script src="scripts/main.js"></script><script src="bower_components/jquery/jquery.min.js"></script><script src="bower_components/todc-bootstrap-main/dist/js/bootstrap.min.js"></script>
