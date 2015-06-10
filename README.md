@@ -1,15 +1,15 @@
-# Hello World
-> A [Bespoke.js](http://markdalgleish.com/projects/bespoke.js) presentation, built with [generator-bespoke](https://github.com/markdalgleish/generator-bespoke)
+# Proyek Kolaborasi TI
+> Sebuah presentasi [Bespoke.js](http://markdalgleish.com/projects/bespoke.js), dibangun dengan [generator-bespoke](https://github.com/markdalgleish/generator-bespoke)
 
-## View slides locally
+## Menampilkan Slide Presentasi Secara Lokal
 
-First, ensure you have the following installed:
+Pertama-tama, pastikan anda telah memiliki perangkat lunak berikut:
 
 1. [Node.js](http://nodejs.org)
 2. [Bower](http://bower.io): `$ npm install -g bower`
 3. [Grunt](http://gruntjs.com): `$ npm install -g grunt-cli`
 
-Then, install dependencies and run the preview server:
+Selanjutnya, pasang *dependency* dan jalankan *preview server*:
 
 ```bash
 $ npm install && bower install

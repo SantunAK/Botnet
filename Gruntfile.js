@@ -1,4 +1,4 @@
-// Generated on 2014-03-18 using generator-bespoke v0.8.0
+// Generated on 2013-11-08 using generator-bespoke v0.4.2
 
 module.exports = function(grunt) {
 
@@ -14,10 +14,7 @@ module.exports = function(grunt) {
           src: '**/*.jade',
           dest: 'public/',
           ext: '.html'
-        }],
-        options: {
-          pretty: true
-        }
+        }]
       }
     },
     stylus: {
@@ -124,7 +121,7 @@ module.exports = function(grunt) {
           'copy'
         ],
         options: {
-          logConcurrentOutput: false
+            logConcurrentOutput: false
         }
       },
       server: {
@@ -138,18 +135,9 @@ module.exports = function(grunt) {
           'watch:public'
         ],
         options: {
-          logConcurrentOutput: true
+            logConcurrentOutput: true
         }
       }
-    },
-    useminPrepare: {
-      html: 'public/index.html',
-      options: {
-        dest: 'public'
-      }
-    },
-    usemin: {
-      html: 'public/index.html'
     },
     'gh-pages': {
       public: {
@@ -164,12 +152,19 @@ module.exports = function(grunt) {
 
   grunt.initConfig(config);
 
-  // Load all Grunt tasks
-  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-jade');
+  grunt.loadNpmTasks('grunt-contrib-stylus');
+  grunt.loadNpmTasks('grunt-contrib-coffee');
+  grunt.loadNpmTasks('grunt-open');
+  grunt.loadNpmTasks('grunt-gh-pages');
+  grunt.loadNpmTasks('grunt-concurrent');
 
-  grunt.registerTask('default', ['compile', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'usemin']);
-  grunt.registerTask('compile', ['clean', 'concurrent:compile']);
-  grunt.registerTask('server', ['compile', 'concurrent:server']);
+  grunt.registerTask('default', ['clean', 'concurrent:compile']);
+  grunt.registerTask('server', ['default', 'concurrent:server']);
   grunt.registerTask('deploy', ['default', 'gh-pages:public']);
 
 };
